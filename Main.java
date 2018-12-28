@@ -3,21 +3,32 @@ import java.util.Scanner;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
-/**
- * Main
- */
 public class Main {
 
     public static void main(String[] args) {
         
         Scanner scanner = new Scanner(System.in);
 
-        int dimension = 0;
-        ArrayList<Vector<Double>> vectors = new ArrayList<Vector<Double>>();
+        int dimension = GetDimension(scanner);
 
-        System.out.print("Set Dimension: ");
+        ArrayList<Vector<Double>> vectors = GetVectorInput(dimension, scanner);
+
+        ArrayList<Vector<Double>> outVectors = Algorithm.Calculate(vectors);
         
-        dimension = Integer.parseInt(scanner.nextLine());
+        PrintOutput(outVectors, dimension);
+    
+        scanner.close();
+    }
+
+    private static int GetDimension(Scanner scanner) {
+       
+        System.out.print("Set Dimension: ");       
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private static ArrayList<Vector<Double>> GetVectorInput(int dimension, Scanner scanner) {
+        
+        ArrayList<Vector<Double>> vectors = new ArrayList<Vector<Double>>();
 
         int x = 0;
         while(x < dimension)
@@ -28,7 +39,7 @@ public class Main {
 
             if(!Pattern.matches("^[-+]?[0-9]+,[-+]?[0-9]+,[-+]?[0-9]+$", line))
             {
-                System.out.println("Wrong input!");
+                System.out.println("Input in wrong format!");
                 continue;
             }
 
@@ -43,12 +54,7 @@ public class Main {
             vectors.add(vec);
             x++;
         }
-      
-        ArrayList<Vector<Double>> outVectors = Algorithm.Calculate(vectors);
-        
-        PrintOutput(outVectors, dimension);
-    
-        scanner.close();
+        return vectors;
     }
 
     private static void PrintOutput(ArrayList<Vector<Double>> outVectors, int dimension) {

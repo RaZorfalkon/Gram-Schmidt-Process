@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.Vector;
 
-/**
- * Algorithm
- */
 public class Algorithm 
 {
     public static ArrayList<Vector<Double>> Calculate(ArrayList<Vector<Double>> inVectors) 
@@ -19,11 +16,6 @@ public class Algorithm
             }
             
             Vector<Double> vec = inVectors.get(outerIndex);
-            //Vector<Double> SubSumVector = new Vector<Double>();
-
-            //for (int i = 0; i < vec.size(); i++) {
-            //    SubSumVector.add(0.0);
-            //}
 
             for (int innerIndex = 0; innerIndex < outerIndex; innerIndex++) 
             {
@@ -39,14 +31,10 @@ public class Algorithm
     private static Vector<Double> GetSubVector(int innerIndex, int outerIndex, ArrayList<Vector<Double>> inVectors, ArrayList<Vector<Double>> outVectors)
     {
         double scalar = CalcScalar(outVectors.get(innerIndex), inVectors.get(outerIndex));
-        double mag = CalcScalar(outVectors.get(innerIndex), outVectors.get(innerIndex)); 
-
-        double div = scalar / mag;
         
         Vector<Double> vec = new Vector<Double>();
 
         for (int i = 0; i < outVectors.get(innerIndex).size(); i++) {
-            // Axthelm mit nur Skalar
             vec.add(outVectors.get(innerIndex).get(i) * scalar);
         }  
         return vec;
